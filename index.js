@@ -8,7 +8,7 @@ app.set('port', (process.env.PORT || 5000));
 
 app.post('/message', function(req, res) {
   var twilio = require('twilio');
-  console.log(req.body);
+  console.log(req);
   var twiml = new twilio.TwimlResponse();
   twiml.message('The Robots are coming! Head for the hills!');
   res.writeHead(200, {'Content-Type': 'text/xml'});
