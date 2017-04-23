@@ -1,28 +1,19 @@
+var http = require('http');
 var express = require('express');
-var bodyParser = require('body-parser');
+var twilio = require('twilio');
 
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.get('/', function(req, res) {
-	res.send("yeah we here");
-})
-
-app.post('/message', function(req,res) {
-    console.log(req.body);
-
-    res.send(`
-        <Response>
-            <Message>
-                Hello ${msgFrom}. You said: ${msgBody}
-            </Message>
-        </Response>
-    `);
+app.post('/message', function(req, res) {
+  var twilio = require('twilio');
+  var twiml = new twilio.TwimlResponse();
+  twiml.message('The Robots are coming! Head for the hills!');
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twiml.toString());
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+http.createServer(app).listen(app.get('port'), function () {
+  console.log("Express server listening on port 1337");
 });
-
-
