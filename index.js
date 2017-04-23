@@ -1,9 +1,11 @@
 var http = require('http');
 var express = require('express');
 var twilio = require('twilio');
+var bodyParser = require('body-parser');
 
 var app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 5000));
 
 app.post('/message', function(req, res) {
